@@ -317,6 +317,15 @@
             listItem.querySelector('.task-text').style.textDecoration = 'none';
           }
     });
+
+          const deleteBtn = listItem.querySelector('.delete-btn');
+          deleteBtn.addEventListener('click', function() {
+              //only count sad actions if the task wasn`t completed 
+              if(!checkbox.checked) {
+                  deleteCount++;
+                  if (deleteCount >= 2) showSadGif();
+              }
+              taskList.removeChild(listItem);
   });
       });
     </script>
