@@ -301,7 +301,7 @@
         taskList.appendChild(listItem);
         input.value = '';
 
-        const deleteBtn = listItem.querySelector('.delete-btn');
+            const deleteBtn = listItem.querySelector('.delete-btn');
           deleteBtn.addEventListener('click', function() {
               //only count sad actions if the task wasn`t completed 
               if(!checkbox.checked) {
@@ -310,28 +310,28 @@
               } else { 
                   //if completed reduce the completed count
                   completedCount = Math.max(0, completedCount - 1);
-              }
+         }
 
-              // Remove the task from the list
+               // Remove the task from the list
               taskList.removeChild(listItem);
-
-              //Update total tasks added today if you are tracking it
+               //Update total tasks added today if you are tracking it
+          if (typeof totalAddedToday !== 'undefined') { 
               totalAddedToday = Math.max(0, totalAddedToday - 1);
+            }
           });
 
-        const checkbox = listItem.querySelector('.task-checkbox');
         checkbox.addEventListener('change', function() {
           if (checkbox.checked) {
+              
             listItem.querySelector('.task-text').style.textDecoration = 'line-through';
             handleReward();
           } else {
+              
             listItem.querySelector('.task-text').style.textDecoration = 'none';
+              // Optional: decrease completedCount if task is unchecked
+              completedCount = Math.max(0, completedCount - 1);
           }
-    });
-
-          
   });
-      });
     </script>
 </body>
 </html>
