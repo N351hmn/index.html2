@@ -160,6 +160,7 @@
       let completedCount = 0;
       let deleteCount = 0;
       let currentAudio = null;
+      let deleteCount = 0;
 
       function playMusicLevel1() {
         const audio = new Audio('https://soundinstants.com/zh/sound/nothing-beats-a-jet2-holiday.mpc320.mp3');
@@ -196,10 +197,10 @@
         ];
 
         const slectedRewards = Math.floor(Math.random() * rewards.length);
-        const selectedReward = rewards[slectedRewards];
         rewardImage.src = selectedReward;
         rewardImage.style.display = 'block';
-
+        
+          const selectedReward = rewards[slectedRewards];
         const songs = [
           'https://serv100.albumaty.com/dl/7h/hossam-hosny/albums/lolash/Lolash.mp3'
         ];
@@ -229,6 +230,7 @@
           setTimeout(() => {
             currentAudio.pause();
             currentAudio.currentTime = 0; // Reset audio to the beginning
+            currentAudio = null;
           }, duration);
         }
 
@@ -300,13 +302,22 @@
         input.value = '';
 
         const deleteBtn = listItem.querySelector('.delete-btn');
-        deleteBtn.addEventListener('click', function() {
-          taskList.removeChild(listItem);
-          deleteCount++;
-          if (deleteCount >= 2) {
-            showSadGif();
-          }
-        });
+          deleteBtn.addEventListener('click', function() {
+              //only count sad actions if the task wasn`t completed 
+              if(!checkbox.checked) {
+                  deleteCount++;
+                  if (deleteCount >= 2) showSadGif();
+              } else { 
+                  //if completed reduce the completed count
+                  completedCount = Math.max(0, completedCount - 1);
+              }
+
+              // Remove the task from the list
+              taskList.removeChild(listItem);
+
+              //Update total tasks added today if you are tracking it
+              totalAddedToday = Math.max(0, totalAddedToday - 1);
+          });
 
         const checkbox = listItem.querySelector('.task-checkbox');
         checkbox.addEventListener('change', function() {
@@ -318,14 +329,7 @@
           }
     });
 
-          const deleteBtn = listItem.querySelector('.delete-btn');
-          deleteBtn.addEventListener('click', function() {
-              //only count sad actions if the task wasn`t completed 
-              if(!checkbox.checked) {
-                  deleteCount++;
-                  if (deleteCount >= 2) showSadGif();
-              }
-              taskList.removeChild(listItem);
+          
   });
       });
     </script>
