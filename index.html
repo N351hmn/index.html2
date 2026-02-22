@@ -179,7 +179,7 @@
       
       function showHappyGif() {
         const rewardImage = document.getElementById('reward-image');
-        const rewards = [
+        const happyRewards = [
 
           'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExajk5Y3RjeHZocGg3OGgyd2dndTJjM3IxeTgxdjR5YXF2cWFoaWxlbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/C7Gj216EwEi4/giphy.webp',
           'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWQwMjViMTB1eW5wYjM5anFqajB6N3RubjR3N2RraWptNzRqaHM2OCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/vFKqnCdLPNOKc/giphy.gif',
@@ -196,21 +196,10 @@
           'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExajk5Y3RjeHZocGg3OGgyd2dndTJjM3IxeTgxdjR5YXF2cWFoaWxlbSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2FhASosZtLUPe/giphy.gif'
         ];
 
-        const slectedRewards = Math.floor(Math.random() * rewards.length);
-        rewardImage.src = selectedReward;
+        const selectedReward = Math.floor(Math.random() * happyRewards.length);
+        rewardImage.src = happyRewards[selectedReward];
         rewardImage.style.display = 'block';
         
-          const selectedReward = rewards[slectedRewards];
-        const songs = [
-          'https://serv100.albumaty.com/dl/7h/hossam-hosny/albums/lolash/Lolash.mp3'
-        ];
-
-        //stop the previous music after 17 seconds
-        setTimeout(() => {
-          const audio = new Audio(songs[0]);
-          audio.pause();
-        }, 17000);
-
         // Hide the reward after 5 seconds (5000 milliseconds)
         setTimeout(() => {
           rewardImage.style.display = 'none';
